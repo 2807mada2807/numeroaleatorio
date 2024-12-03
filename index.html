@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Adivina el Número!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f0f0; /* Fondo gris */
+        }
+        h1 {
+            color: #ff66b2; /* Rosa vibrante */
+        }
+        .container {
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #ffffff; /* Fondo blanco */
+            border: 2px solid #ff66b2; /* Borde rosa */
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            width: 80%;
+            border: 2px solid #ff66b2; /* Borde rosa */
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #ff66b2; /* Rosa */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 85%;
+        }
+        button:hover {
+            background-color: #ff99cc; /* Rosa más claro */
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333; /* Texto oscuro para buen contraste */
+        }
+    </style>
+</head>
+<body>
+    <h1>¡Adivina el Número!</h1>
+    <p>Intenta adivinar un número entre 0 y 100.</p>
+    <div class="container">
+        <input type="number" id="guessInput" placeholder="Tu número" min="0" max="100">
+        <button onclick="checkGuess()">Probar</button>
+    </div>
+    <div class="message" id="message"></div>
+
+    <script>
+        // Generar un número aleatorio entre 0 y 100
+        const randomNumber = Math.floor(Math.random() * 101);
+        let attempts = 0;
+
+        function checkGuess() {
+            const guess = Number(document.getElementById('guessInput').value);
+            const message = document.getElementById('message');
+            attempts++;
+
+            if (isNaN(guess) || guess < 0 || guess > 100) {
+                message.textContent = "Introduce un número válido entre 0 y 100.";
+            } else if (guess === randomNumber) {
+                message.textContent = `🎉 ¡Correcto! El número era ${randomNumber}. Lo adivinaste en ${attempts} intento(s).`;
+            } else if (guess < randomNumber) {
+                message.textContent = " El número es mayor. ¡Intenta de nuevo!";
+            } else {
+                message.textContent = " El número es menor. ¡Intenta de nuevo!";
+            }
+        }
+    </script>
+</body>
+</html>
